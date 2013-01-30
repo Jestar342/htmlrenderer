@@ -38,11 +38,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BodyTag.cs" />
     <Compile Include="HeadTag.cs" />
+    <Compile Include="HtmlBuilder.cs" />
     <Compile Include="HtmlRenderer.cs" />
     <Compile Include="HtmlTag.cs" />
+    <Compile Include="IBuildableTag.cs" />
     <Compile Include="IHeadTag.cs" />
+    <Compile Include="IHtmlBuilder.cs" />
     <Compile Include="IHtmlTag.cs" />
+    <Compile Include="ITextTag.cs" />
+    <Compile Include="ScriptTag.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="TextTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Xml" />

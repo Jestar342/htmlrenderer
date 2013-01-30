@@ -4,18 +4,27 @@ namespace HtmlRenderer
 {
     public class HtmlTag : IHtmlTag
     {
-        private readonly IHeadTag headTag;
+        public HtmlTag(IHeadTag headTag, IBuildableTag bodyTag)
+        {
+            Head = headTag;
+            Body = bodyTag;
+        }
 
         public HtmlTag()
+            : this(new HeadTag(), new BodyTag())
         {
-            headTag = new HeadTag();
         }
+
+        public IHeadTag Head { get; private set; }
+        public IBuildableTag Body { get; private set; }
 
         public void RenderOn(XmlDocument xmlDocument)
         {
-            var element = xmlDocument.CreateElement("html");
-            headTag.RenderOn(element, xmlDocument);
-            xmlDocument.AppendChild(element);
+            var htmlTag = xmlDocument.CreateElement("html");
+            htmlTag.SetAttribute("lang", "en");
+            Head.RenderOn(htmlTag, xmlDocument);
+            Body.RenderOn(htmlTag, xmlDocument);
+            xmlDocument.AppendChild(htmlTag);
         }
     }
 }

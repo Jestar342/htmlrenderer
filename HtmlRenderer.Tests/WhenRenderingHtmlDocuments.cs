@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace HtmlRenderer.Tests
@@ -7,6 +6,25 @@ namespace HtmlRenderer.Tests
     [TestFixture]
     public class WhenRenderingHtmlDocuments
     {
+        [Test]
+        [Ignore]
+        public void NotARealTestIJustWantToSeeTheOutput()
+        {
+            Assert.Fail(output);
+        }
+
+        [Test]
+        public void ShouldRenderBody()
+        {
+            Assert.That(output, Is.StringMatching(@"<body>(.*|\s*)*</body>"));
+        }
+
+        [Test]
+        public void ShouldRenderDiv()
+        {
+            Assert.That(output, Is.StringMatching(@"<div>(.*|\s*)</div>"));
+        }
+
         [Test]
         public void ShouldRenderDocType()
         {
@@ -16,13 +34,37 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderHtmlTag()
         {
-            Assert.That(output, Is.StringMatching(@"<html>(.*|\s*)*</html>"));
+            Assert.That(output, Is.StringMatching(@"<html lang=""en"">(.*|\s*)*</html>"));
+        }
+
+        [Test]
+        public void ShouldRenderLink()
+        {
+            Assert.That(output, Is.StringMatching(@"<link(?=.*rel=""stylesheet"")(?=.*href=""/src/foo.css"").*/>"));
+        }
+
+        [Test]
+        public void ShouldRenderParagraph()
+        {
+            Assert.That(output, Is.StringMatching(@"<p>(.*|\s*)</p>"));
+        }
+
+        [Test]
+        public void ShouldRenderScript()
+        {
+            Assert.That(output, Is.StringMatching(@"<script(?=.*src=""/src/foo.js"")(?=.*type=""text/javascript"").*/>"));
+        }
+
+        [Test]
+        public void ShouldRenderSpan()
+        {
+            Assert.That(output, Is.StringMatching(@"<span>(.*|\s*)</span>"));
         }
 
         [Test]
         public void ShouldRenderTitle()
         {
-            Assert.That(output, Is.StringMatching("<title>foo</title>"));
+            Assert.That(output, Is.StringContaining("<title>foo</title>"));
         }
 
         [TestFixtureSetUp]
@@ -31,11 +73,30 @@ namespace HtmlRenderer.Tests
             using (var memoryStream = new MemoryStream())
             {
                 var renderer = new HtmlRenderer(memoryStream);
+
+                SetupHeadTag(renderer.Head);
+
+                SetupBodyTag(renderer.Body);
+
                 renderer.Render();
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 var reader = new StreamReader(memoryStream);
                 output = reader.ReadToEnd();
             }
+        }
+
+        private static void SetupBodyTag(IBuildableTag bodyTag)
+        {
+            bodyTag
+                .With(htmlBuilder => htmlBuilder.Div.With(builder => builder.Text("first text").Span.With(builder1 => builder1.Text("span content").Text("second text"))))
+                .With(htmlBuilder => htmlBuilder.Paragraph.With(builder => builder.Text("paragraph text")));
+        }
+
+        private static void SetupHeadTag(IHeadTag headTag)
+        {
+            headTag.Title = "foo";
+            headTag.Links.Add(new LinkTag("stylesheet", "/src/foo.css"));
+            headTag.Scripts.Add(new ScriptTag("/src/foo.js", "text/javascript"));
         }
 
         private string output;
