@@ -6,6 +6,6 @@ namespace HtmlRenderer
     {
         void RenderOn(XmlDocument xmlDocument);
         IHeadTag Head { get; }
-        IBuildableTag Body { get; }
+        IBodyTag Body { get; }
     }
 }

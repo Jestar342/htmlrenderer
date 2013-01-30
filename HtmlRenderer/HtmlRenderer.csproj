@@ -43,11 +43,15 @@
     <Compile Include="HtmlBuilder.cs" />
     <Compile Include="HtmlRenderer.cs" />
     <Compile Include="HtmlTag.cs" />
+    <Compile Include="IBodyTag.cs" />
     <Compile Include="IBuildableTag.cs" />
     <Compile Include="IHeadTag.cs" />
     <Compile Include="IHtmlBuilder.cs" />
     <Compile Include="IHtmlTag.cs" />
-    <Compile Include="ITextTag.cs" />
+    <Compile Include="ILinkTag.cs" />
+    <Compile Include="IScriptTag.cs" />
+    <Compile Include="ITag.cs" />
+    <Compile Include="LinkTag.cs" />
     <Compile Include="ScriptTag.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="TextTag.cs" />

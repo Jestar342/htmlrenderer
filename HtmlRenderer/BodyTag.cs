@@ -1,30 +1,16 @@
-using System;
 using System.Collections.Generic;
-using System.Xml;
 
 namespace HtmlRenderer
 {
-    public class BodyTag : IBuildableTag
+    public class BodyTag : Tag, IBodyTag
     {
-        private List<ITag> children;
+        private readonly List<ITag> children;
 
-        public BodyTag()
+        public BodyTag() : base("body")
         {
             children = new List<ITag>();
-        }
-
-        public void RenderOn(XmlElement parent, XmlDocument xmlDocument)
-        {
-            var bodyTag = xmlDocument.CreateElement("body");
-            children.ForEach(child => child.RenderOn(bodyTag, xmlDocument));
-            parent.AppendChild(bodyTag);
-        }
-
-        public IBuildableTag With(Action<IHtmlBuilder> builderAction)
-        {
-            var builder = new HtmlBuilder(children);
-            builderAction(builder);
-            return this;
+            Attributes = new Dictionary<string, string>();
+            HtmlBuilder = new HtmlBuilder(children);
         }
     }
 }

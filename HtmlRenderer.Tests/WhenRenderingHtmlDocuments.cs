@@ -7,7 +7,6 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlDocuments
     {
         [Test]
-        [Ignore]
         public void NotARealTestIJustWantToSeeTheOutput()
         {
             Assert.Fail(output);
@@ -16,7 +15,7 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderBody()
         {
-            Assert.That(output, Is.StringMatching(@"<body>(.*|\s*)*</body>"));
+            Assert.That(output, Is.StringMatching(@"<body class=""body-class"">(.*|\s*)*</body>"));
         }
 
         [Test]
@@ -58,13 +57,19 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderSpan()
         {
-            Assert.That(output, Is.StringMatching(@"<span>(.*|\s*)</span>"));
+            Assert.That(output, Is.StringMatching(@"<span class=""span-class"">(.*|\s*)</span>"));
         }
 
         [Test]
         public void ShouldRenderTitle()
         {
             Assert.That(output, Is.StringContaining("<title>foo</title>"));
+        }
+
+        [Test]
+        public void ShouldRenderAnchor()
+        {
+            Assert.That(output, Is.StringMatching(@"<a(?=.*href=""/some/link"")(?=.*class=""anchor-class"").*>(.*|\s*)</a>"));
         }
 
         [TestFixtureSetUp]
@@ -88,8 +93,14 @@ namespace HtmlRenderer.Tests
         private static void SetupBodyTag(IBuildableTag bodyTag)
         {
             bodyTag
-                .With(htmlBuilder => htmlBuilder.Div.With(builder => builder.Text("first text").Span.With(builder1 => builder1.Text("span content").Text("second text"))))
-                .With(htmlBuilder => htmlBuilder.Paragraph.With(builder => builder.Text("paragraph text")));
+                .WithClass("body-class")
+                .With(htmlBuilder => htmlBuilder.Div.With(
+                    builder => builder
+                                   .Text("first text")
+                                   .Span.WithClass("span-class").With(builder1 => builder1.Text("span content"))
+                                   .Text("second text")
+                                   .Anchor("/some/link").WithClass("anchor-class").With(builder1 => builder1.Text("clickety-click"))
+                                   .Paragraph.With(builder1 => builder1.Text("paragraph text"))));
         }
 
         private static void SetupHeadTag(IHeadTag headTag)

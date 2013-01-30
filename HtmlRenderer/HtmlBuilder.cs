@@ -4,47 +4,46 @@ namespace HtmlRenderer
 {
     public class HtmlBuilder : IHtmlBuilder
     {
-        private readonly List<ITag> children;
+        private readonly List<ITag> tags;
 
-        public HtmlBuilder(List<ITag> children)
+        public HtmlBuilder(List<ITag> tags)
         {
-            this.children = children;
+            this.tags = tags;
         }
 
         public IBuildableTag Div
         {
-            get
-            {
-                var tag = new Tag("div");
-                children.Add(tag);
-                return tag;
-            }
+            get { return CreateChildTag("div"); }
         }
 
         public IBuildableTag Span
         {
-            get
-            {
-                var tag = new Tag("span");
-                children.Add(tag);
-                return tag;
-            }
+            get { return CreateChildTag("span"); }
         }
 
         public IBuildableTag Paragraph
         {
-            get
-            {
-                var paragraphTag = new Tag("p");
-                children.Add(paragraphTag);
-                return paragraphTag;
-            }
+            get { return CreateChildTag("p"); }
         }
 
         public IHtmlBuilder Text(string text)
         {
-            children.Add(new TextTag(text));
+            tags.Add(new TextTag(text));
             return this;
+        }
+
+        public IBuildableTag Anchor(string href)
+        {
+            var buildableTag = CreateChildTag("a");
+            buildableTag.Attributes["href"] = href;
+            return buildableTag;
+        }
+
+        private IBuildableTag CreateChildTag(string name)
+        {
+            var tag = new Tag(name, this);
+            tags.Add(tag);
+            return tag;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Xml;
 
 namespace HtmlRenderer
 {
-    public class TextTag : ITextTag
+    public class TextTag : ITag
     {
         private readonly string text;
 

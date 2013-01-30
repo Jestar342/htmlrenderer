@@ -4,7 +4,7 @@ namespace HtmlRenderer
 {
     public class HtmlTag : IHtmlTag
     {
-        public HtmlTag(IHeadTag headTag, IBuildableTag bodyTag)
+        public HtmlTag(IHeadTag headTag, IBodyTag bodyTag)
         {
             Head = headTag;
             Body = bodyTag;
@@ -16,7 +16,7 @@ namespace HtmlRenderer
         }
 
         public IHeadTag Head { get; private set; }
-        public IBuildableTag Body { get; private set; }
+        public IBodyTag Body { get; private set; }
 
         public void RenderOn(XmlDocument xmlDocument)
         {

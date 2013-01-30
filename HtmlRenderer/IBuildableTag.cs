@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace HtmlRenderer
 {
     public interface IBuildableTag : ITag
     {
-        IBuildableTag With(Action<IHtmlBuilder> builderAction);
+        IHtmlBuilder With(Action<IHtmlBuilder> builderAction);
+        IDictionary<string, string> Attributes { get; }
+        IBuildableTag WithClass(string @class);
     }
 }
