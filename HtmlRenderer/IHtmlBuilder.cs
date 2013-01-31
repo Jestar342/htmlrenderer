@@ -7,5 +7,8 @@ namespace HtmlRenderer
         IBuildableTag Paragraph { get; }
         IHtmlBuilder Text(string text);
         IBuildableTag Anchor(string href);
+        IImageTag Image(string src);
+        IFormTag Form(string formAction);
+        IBuildableTag SubmitButton(string buttonText);
     }
 }

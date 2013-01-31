@@ -7,6 +7,7 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlDocuments
     {
         [Test]
+        [Ignore]
         public void NotARealTestIJustWantToSeeTheOutput()
         {
             Assert.Fail(output);
@@ -72,6 +73,18 @@ namespace HtmlRenderer.Tests
             Assert.That(output, Is.StringMatching(@"<a(?=.*href=""/some/link"")(?=.*class=""anchor-class"").*>(.*|\s*)</a>"));
         }
 
+        [Test]
+        public void ShouldRenderImage()
+        {
+            Assert.That(output, Is.StringMatching(@"<img(?=.*src=""/src/image.jpg"")(?=.*alt=""alt text"").*/>"));
+        }
+
+        [Test]
+        public void ShouldRenderForm()
+        {
+            Assert.That(output, Is.StringMatching(@"<form(?=.*action=""/form/action"")(?=.*method=""post"").*>(.*|\s)*</form>"));
+        }
+
         [TestFixtureSetUp]
         public void SetupRendererAndRender()
         {
@@ -94,13 +107,18 @@ namespace HtmlRenderer.Tests
         {
             bodyTag
                 .WithClass("body-class")
-                .With(htmlBuilder => htmlBuilder.Div.With(
-                    builder => builder
-                                   .Text("first text")
-                                   .Span.WithClass("span-class").With(builder1 => builder1.Text("span content"))
-                                   .Text("second text")
-                                   .Anchor("/some/link").WithClass("anchor-class").With(builder1 => builder1.Text("clickety-click"))
-                                   .Paragraph.With(builder1 => builder1.Text("paragraph text"))));
+                .With(htmlBuilder =>
+                          {
+                              htmlBuilder
+                                  .Div.With(builder => builder
+                                                           .Text("first text")
+                                                           .Span.WithClass("span-class").With(builder1 => builder1.Text("span content"))
+                                                           .Text("second text")
+                                                           .Anchor("/some/link").WithClass("anchor-class").With(builder1 => builder1.Text("clickety-click"))
+                                                           .Paragraph.With(builder1 => builder1.Text("paragraph text")))
+                                  .Image("/src/image.jpg").AlternativeText("alt text").With(builder => { });
+                              htmlBuilder.Form("/form/action").Method("post").With(builder => builder.SubmitButton("click to submit"));
+                          });
         }
 
         private static void SetupHeadTag(IHeadTag headTag)

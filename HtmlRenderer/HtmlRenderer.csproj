@@ -39,16 +39,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyTag.cs" />
+    <Compile Include="FormTag.cs" />
     <Compile Include="HeadTag.cs" />
     <Compile Include="HtmlBuilder.cs" />
     <Compile Include="HtmlRenderer.cs" />
     <Compile Include="HtmlTag.cs" />
     <Compile Include="IBodyTag.cs" />
     <Compile Include="IBuildableTag.cs" />
+    <Compile Include="IFormTag.cs" />
     <Compile Include="IHeadTag.cs" />
     <Compile Include="IHtmlBuilder.cs" />
     <Compile Include="IHtmlTag.cs" />
+    <Compile Include="IImageTag.cs" />
     <Compile Include="ILinkTag.cs" />
+    <Compile Include="ImageTag.cs" />
     <Compile Include="IScriptTag.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="LinkTag.cs" />

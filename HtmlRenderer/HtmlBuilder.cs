@@ -39,6 +39,28 @@ namespace HtmlRenderer
             return buildableTag;
         }
 
+        public IImageTag Image(string src)
+        {
+            var imageTag = new ImageTag(src, this);
+            tags.Add(imageTag);
+            return imageTag;
+        }
+
+        public IFormTag Form(string formAction)
+        {
+            var formTag = new FormTag(formAction, "post", this);
+            tags.Add(formTag);
+            return formTag;
+        }
+
+        public IBuildableTag SubmitButton(string buttonText)
+        {
+            var submitButton = CreateChildTag("input");
+            submitButton.Attributes["type"] = "submit";
+            submitButton.Attributes["value"] = buttonText;
+            return submitButton;
+        }
+
         private IBuildableTag CreateChildTag(string name)
         {
             var tag = new Tag(name, this);
