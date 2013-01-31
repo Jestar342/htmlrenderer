@@ -38,7 +38,7 @@ A simple example, in a (custom) MVC4 IView.
 	    }
 	}
 
-Will generate the following: HTML markup (indentation has been added to this readme to simply reading)
+Will generate the following: HTML markup (indentation has been added to this readme to simplify reading)
 	
 	<!DOCTYPE html >
 	<html lang="en">
