@@ -39,19 +39,20 @@ A simple example, in a (custom) MVC4 IView.
 	}
 
 Will generate the following: HTML markup (indentation has been added to this readme to simply reading)
-	<!DOCTYPE html >
-	<html lang="en">
-	  <head>
-	    <title>foo</title>
-	    <link rel="stylesheet" href="/src/foo.css" />
-	    <script src="/src/foo.js" type="text/javascript"></script>
-	  </head>
-	  <body class="body-class">
-	    <div>first text<span class="span-class">span content</span>second text<a href="/some/link" class="anchor-class">clickety-click</a><p>paragraph text</p></div>
-	    <img src="/src/image.jpg" alt="alt text" />
-	    <form action="/form/action" method="post">
-	      <input type="text" name="text-box" />
-	      <input type="submit" value="click to submit" />
-	    </form>
-	  </body>
-	</html>
+	
+	&lt;!DOCTYPE html &gt;
+	&lt;html lang="en"&gt;
+	  &lt;head&gt;
+	    &lt;title&gt;foo&lt;/title&gt;
+	    &lt;link rel="stylesheet" href="/src/foo.css" /&gt;
+	    &lt;script src="/src/foo.js" type="text/javascript"&gt;&lt;/script&gt;
+	  &lt;/head&gt;
+	  &lt;body class="body-class"&gt;
+	    &lt;div&gt;first text&lt;span class="span-class"&gt;span content&lt;/span&gt;second text&lt;a href="/some/link" class="anchor-class"&gt;clickety-click&lt;/a&gt;&lt;p&gt;paragraph text&lt;/p&gt;&lt;/div&gt;
+	    &lt;img src="/src/image.jpg" alt="alt text" /&gt;
+	    &lt;form action="/form/action" method="post"&gt;
+	      &lt;input type="text" name="text-box" /&gt;
+	      &lt;input type="submit" value="click to submit" /&gt;
+	    &lt;/form&gt;
+	  &lt;/body&gt;
+	&lt;/html&gt;
