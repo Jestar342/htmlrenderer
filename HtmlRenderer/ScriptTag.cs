@@ -18,6 +18,7 @@ namespace HtmlRenderer
             var scriptTag = xmlDocument.CreateElement("script");
             scriptTag.SetAttribute("src", Src);
             scriptTag.SetAttribute("type", Type);
+            scriptTag.IsEmpty = false;
             parent.AppendChild(scriptTag);
         }
     }

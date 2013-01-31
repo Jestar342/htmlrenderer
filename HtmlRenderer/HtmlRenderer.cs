@@ -5,15 +5,14 @@ namespace HtmlRenderer
 {
     public class HtmlRenderer
     {
+        private readonly TextWriter textWriter;
         private readonly IHtmlTag htmlTag;
 
-        public HtmlRenderer(Stream stream)
+        public HtmlRenderer(TextWriter textWriter)
         {
-            Stream = stream;
+            this.textWriter = textWriter;
             htmlTag = new HtmlTag();
         }
-
-        public Stream Stream { get; private set; }
 
         public IHeadTag Head
         {
@@ -31,7 +30,7 @@ namespace HtmlRenderer
             var xmlDocumentType = xmlDocument.CreateDocumentType("html", null, null, null);
             xmlDocument.AppendChild(xmlDocumentType);
             htmlTag.RenderOn(xmlDocument);
-            xmlDocument.Save(Stream);
+            xmlDocument.Save(XmlWriter.Create(textWriter, new XmlWriterSettings { OmitXmlDeclaration = true }));
         }
     }
 }

@@ -7,7 +7,7 @@ namespace HtmlRenderer
         public string Rel { get; private set; }
         public string Href { get; private set; }
 
-        public LinkTag(string rel, string href)
+        public LinkTag(string href, string rel)
         {
             Rel = rel;
             Href = href;

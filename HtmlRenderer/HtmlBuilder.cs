@@ -61,6 +61,14 @@ namespace HtmlRenderer
             return submitButton;
         }
 
+        public IBuildableTag Textbox(string textBoxName)
+        {
+            var tag = CreateChildTag("input");
+            tag.Attributes["type"] = "text";
+            tag.Attributes["name"] = textBoxName;
+            return tag;
+        }
+
         private IBuildableTag CreateChildTag(string name)
         {
             var tag = new Tag(name, this);

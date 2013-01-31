@@ -7,7 +7,6 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlDocuments
     {
         [Test]
-        [Ignore]
         public void NotARealTestIJustWantToSeeTheOutput()
         {
             Assert.Fail(output);
@@ -22,7 +21,7 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderDiv()
         {
-            Assert.That(output, Is.StringMatching(@"<div>(.*|\s*)</div>"));
+            Assert.That(output, Is.StringMatching(@"<div>(.*|\s*)*</div>"));
         }
 
         [Test]
@@ -46,19 +45,19 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderParagraph()
         {
-            Assert.That(output, Is.StringMatching(@"<p>(.*|\s*)</p>"));
+            Assert.That(output, Is.StringMatching(@"<p>(.*|\s*)*</p>"));
         }
 
         [Test]
         public void ShouldRenderScript()
         {
-            Assert.That(output, Is.StringMatching(@"<script(?=.*src=""/src/foo.js"")(?=.*type=""text/javascript"").*/>"));
+            Assert.That(output, Is.StringMatching(@"<script(?=.*src=""/src/foo.js"")(?=.*type=""text/javascript"").*>(.*|\s*)*</script>"));
         }
 
         [Test]
         public void ShouldRenderSpan()
         {
-            Assert.That(output, Is.StringMatching(@"<span class=""span-class"">(.*|\s*)</span>"));
+            Assert.That(output, Is.StringMatching(@"<span class=""span-class"">(.*|\s*)*</span>"));
         }
 
         [Test]
@@ -70,7 +69,7 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderAnchor()
         {
-            Assert.That(output, Is.StringMatching(@"<a(?=.*href=""/some/link"")(?=.*class=""anchor-class"").*>(.*|\s*)</a>"));
+            Assert.That(output, Is.StringMatching(@"<a(?=.*href=""/some/link"")(?=.*class=""anchor-class"").*>(.*|\s*)*</a>"));
         }
 
         [Test]
@@ -82,13 +81,13 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldRenderForm()
         {
-            Assert.That(output, Is.StringMatching(@"<form(?=.*action=""/form/action"")(?=.*method=""post"").*>(.*|\s)*</form>"));
+            Assert.That(output, Is.StringMatching(@"<form(?=.*action=""/form/action"")(?=.*method=""post"").*>(.*|\s*)*</form>"));
         }
 
         [TestFixtureSetUp]
         public void SetupRendererAndRender()
         {
-            using (var memoryStream = new MemoryStream())
+            using (var memoryStream = new StringWriter())
             {
                 var renderer = new HtmlRenderer(memoryStream);
 
@@ -97,9 +96,8 @@ namespace HtmlRenderer.Tests
                 SetupBodyTag(renderer.Body);
 
                 renderer.Render();
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                var reader = new StreamReader(memoryStream);
-                output = reader.ReadToEnd();
+
+                output = memoryStream.ToString();
             }
         }
 
@@ -107,24 +105,23 @@ namespace HtmlRenderer.Tests
         {
             bodyTag
                 .WithClass("body-class")
-                .With(htmlBuilder =>
-                          {
-                              htmlBuilder
-                                  .Div.With(builder => builder
-                                                           .Text("first text")
-                                                           .Span.WithClass("span-class").With(builder1 => builder1.Text("span content"))
-                                                           .Text("second text")
-                                                           .Anchor("/some/link").WithClass("anchor-class").With(builder1 => builder1.Text("clickety-click"))
-                                                           .Paragraph.With(builder1 => builder1.Text("paragraph text")))
-                                  .Image("/src/image.jpg").AlternativeText("alt text").With(builder => { });
-                              htmlBuilder.Form("/form/action").Method("post").With(builder => builder.SubmitButton("click to submit"));
-                          });
+                .With(htmlBuilder => htmlBuilder
+                                         .Div.With(builder => builder
+                                                                  .Text("first text")
+                                                                  .Span.WithClass("span-class").With(builder1 => builder1.Text("span content"))
+                                                                  .Text("second text")
+                                                                  .Anchor("/some/link").WithClass("anchor-class").With(builder1 => builder1.Text("clickety-click"))
+                                                                  .Paragraph.With(builder1 => builder1.Text("paragraph text")))
+                                         .Image("/src/image.jpg").AlternativeText("alt text").With(builder => { })
+                                         .Form("/form/action").Method("post").With(builder => builder
+                                                                                                  .Textbox("text-box").With(builder1 => { })
+                                                                                                  .SubmitButton("click to submit")));
         }
 
         private static void SetupHeadTag(IHeadTag headTag)
         {
             headTag.Title = "foo";
-            headTag.Links.Add(new LinkTag("stylesheet", "/src/foo.css"));
+            headTag.Links.Add(new LinkTag("/src/foo.css", "stylesheet"));
             headTag.Scripts.Add(new ScriptTag("/src/foo.js", "text/javascript"));
         }
 
