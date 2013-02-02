@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlRenderer", "HtmlRendere
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlRenderer.Tests", "HtmlRenderer.Tests\HtmlRenderer.Tests.csproj", "{08CAEC68-061F-4219-A5A6-7110CF0907B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication1", "MvcApplication1\MvcApplication1.csproj", "{31CF9A6B-7124-4C50-ABCE-162C969FCFC3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +19,6 @@ Global
 		{08CAEC68-061F-4219-A5A6-7110CF0907B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08CAEC68-061F-4219-A5A6-7110CF0907B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08CAEC68-061F-4219-A5A6-7110CF0907B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31CF9A6B-7124-4C50-ABCE-162C969FCFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31CF9A6B-7124-4C50-ABCE-162C969FCFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31CF9A6B-7124-4C50-ABCE-162C969FCFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31CF9A6B-7124-4C50-ABCE-162C969FCFC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
