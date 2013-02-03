@@ -1,36 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace HtmlRenderer
 {
     public class HeadTag : IHeadTag
     {
+        private readonly List<ITag> children;
+
         public HeadTag()
         {
-            Links = new List<ILinkTag>();
-            Scripts = new List<IScriptTag>();
+            children = new List<ITag>();
         }
+
+        public void With(Action<IHtmlHeadBuilder> builderAction)
+        {
+            builderAction(new HtmlHeadBuilder(children));
+        }
+
         public void RenderOn(XmlElement parent, XmlDocument xmlDocument)
         {
             var headElement = xmlDocument.CreateElement("head");
-            
-            if (!string.IsNullOrWhiteSpace(Title))
-            {
-                var title = xmlDocument.CreateElement("title");
-                title.InnerText = Title;
-                headElement.AppendChild(title);
-            }
-
-            Links.ToList().ForEach(linkTag => linkTag.RenderOn(headElement, xmlDocument));
-
-            Scripts.ToList().ForEach(scriptTag => scriptTag.RenderOn(headElement, xmlDocument));
-
+            children.ForEach(tag => tag.RenderOn(headElement, xmlDocument));
             parent.AppendChild(headElement);
         }
-
-        public string Title { get; set; }
-        public IList<ILinkTag> Links { get; private set; }
-        public IList<IScriptTag> Scripts { get; private set; }
     }
 }

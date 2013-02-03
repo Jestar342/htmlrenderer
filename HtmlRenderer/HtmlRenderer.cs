@@ -27,8 +27,7 @@ namespace HtmlRenderer
         public void Render()
         {
             var xmlDocument = new XmlDocument();
-            var xmlDocumentType = xmlDocument.CreateDocumentType("html", null, null, null);
-            xmlDocument.AppendChild(xmlDocumentType);
+            xmlDocument.AppendChild(xmlDocument.CreateDocumentType("html", null, null, null));
             htmlTag.RenderOn(xmlDocument);
             xmlDocument.Save(XmlWriter.Create(textWriter, new XmlWriterSettings { OmitXmlDeclaration = true }));
         }

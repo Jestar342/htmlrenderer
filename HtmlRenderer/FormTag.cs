@@ -1,6 +1,9 @@
+using System;
+using HtmlRenderer.Form;
+
 namespace HtmlRenderer
 {
-    public class FormTag : Tag, IFormTag
+    public class FormTag : FormBuilderTag, IFormTag
     {
         public FormTag(string formAction, string method, IHtmlBuilder htmlBuilder) : base("form", htmlBuilder)
         {

@@ -9,7 +9,11 @@ namespace HtmlRenderer
         IBuildableTag Anchor(string href);
         IImageTag Image(string src);
         IFormTag Form(string formAction);
-        IBuildableTag SubmitButton(string buttonText);
-        IBuildableTag Textbox(string textBoxName);
+        IBuildableTag Heading(int headingLevel);
+    }
+
+    public interface IRadioButtonTag : IBuildableTag
+    {
+        IRadioButtonTag Checked();
     }
 }

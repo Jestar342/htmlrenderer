@@ -4,11 +4,11 @@ namespace HtmlRenderer
 {
     public class HtmlBuilder : IHtmlBuilder
     {
-        private readonly List<ITag> tags;
+        protected readonly List<ITag> Tags;
 
         public HtmlBuilder(List<ITag> tags)
         {
-            this.tags = tags;
+            Tags = tags;
         }
 
         public IBuildableTag Div
@@ -28,7 +28,7 @@ namespace HtmlRenderer
 
         public IHtmlBuilder Text(string text)
         {
-            tags.Add(new TextTag(text));
+            Tags.Add(new TextTag(text));
             return this;
         }
 
@@ -42,37 +42,26 @@ namespace HtmlRenderer
         public IImageTag Image(string src)
         {
             var imageTag = new ImageTag(src, this);
-            tags.Add(imageTag);
+            Tags.Add(imageTag);
             return imageTag;
         }
 
         public IFormTag Form(string formAction)
         {
             var formTag = new FormTag(formAction, "post", this);
-            tags.Add(formTag);
+            Tags.Add(formTag);
             return formTag;
         }
 
-        public IBuildableTag SubmitButton(string buttonText)
+        public IBuildableTag Heading(int headingLevel)
         {
-            var submitButton = CreateChildTag("input");
-            submitButton.Attributes["type"] = "submit";
-            submitButton.Attributes["value"] = buttonText;
-            return submitButton;
+            return CreateChildTag(string.Format("h{0}", headingLevel));
         }
 
-        public IBuildableTag Textbox(string textBoxName)
-        {
-            var tag = CreateChildTag("input");
-            tag.Attributes["type"] = "text";
-            tag.Attributes["name"] = textBoxName;
-            return tag;
-        }
-
-        private IBuildableTag CreateChildTag(string name)
+        public IBuildableTag CreateChildTag(string name)
         {
             var tag = new Tag(name, this);
-            tags.Add(tag);
+            Tags.Add(tag);
             return tag;
         }
     }

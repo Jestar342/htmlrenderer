@@ -7,6 +7,7 @@ namespace HtmlRenderer
     {
         IHtmlBuilder With(Action<IHtmlBuilder> builderAction);
         IDictionary<string, string> Attributes { get; }
-        IBuildableTag WithClass(string @class);
+        IBuildableTag Class(string @class);
+        IBuildableTag Id(string id);
     }
 }

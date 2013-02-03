@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace HtmlRenderer
 {
     public interface IHeadTag : ITag
     {
-        string Title { get; set; }
-        IList<ILinkTag> Links { get; }
-        IList<IScriptTag> Scripts { get; }
+        void With(Action<IHtmlHeadBuilder> builderAction);        
     }
 }

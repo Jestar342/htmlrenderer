@@ -7,9 +7,9 @@ namespace HtmlRenderer
 {
     public class Tag : IBuildableTag
     {
-        private readonly List<ITag> children;
-        protected IHtmlBuilder HtmlBuilder;
+        protected readonly List<ITag> Children;
         private readonly string name;
+        protected IHtmlBuilder HtmlBuilder;
 
         public Tag(string name, IHtmlBuilder htmlBuilder)
             : this(name)
@@ -20,7 +20,7 @@ namespace HtmlRenderer
         protected Tag(string name)
         {
             this.name = name;
-            children = new List<ITag>();
+            Children = new List<ITag>();
             Attributes = new Dictionary<string, string>();
         }
 
@@ -32,22 +32,28 @@ namespace HtmlRenderer
 
             Attributes.ToList().ForEach(attribute => tag.SetAttribute(attribute.Key, attribute.Value));
 
-            children.ForEach(child => child.RenderOn(tag, xmlDocument));
+            Children.ForEach(child => child.RenderOn(tag, xmlDocument));
             parent.AppendChild(tag);
         }
 
         public IHtmlBuilder With(Action<IHtmlBuilder> builderAction)
         {
-            builderAction(new HtmlBuilder(children));
+            builderAction(new HtmlBuilder(Children));
             return HtmlBuilder;
         }
 
-        public IBuildableTag WithClass(string @class)
+        public IBuildableTag Class(string @class)
         {
             if (Attributes.ContainsKey("class"))
                 Attributes["class"] += string.Format(" {0}", @class);
             else
                 Attributes["class"] = @class;
+            return this;
+        }
+
+        public IBuildableTag Id(string id)
+        {
+            Attributes["id"] = id;
             return this;
         }
     }
