@@ -39,14 +39,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyTag.cs" />
-    <Compile Include="FormBuilderTag.cs" />
-    <Compile Include="FormTag.cs" />
+    <Compile Include="Form\FormBuilderTag.cs" />
     <Compile Include="Form\FormChildTag.cs" />
+    <Compile Include="Form\FormTag.cs" />
     <Compile Include="Form\HtmlFormBuilder.cs" />
     <Compile Include="Form\IFieldsetTag.cs" />
     <Compile Include="Form\IHtmlFormBuilder.cs" />
     <Compile Include="Form\IInputTag.cs" />
     <Compile Include="Form\InputTag.cs" />
+    <Compile Include="Form\ITextAreaTag.cs" />
+    <Compile Include="Form\TextAreaTag.cs" />
     <Compile Include="HeadTag.cs" />
     <Compile Include="HtmlBuilder.cs" />
     <Compile Include="HtmlHeadBuilder.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="IImageTag.cs" />
     <Compile Include="ILinkTag.cs" />
     <Compile Include="ImageTag.cs" />
+    <Compile Include="IRadioButtonTag.cs" />
     <Compile Include="IScriptTag.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="LinkTag.cs" />

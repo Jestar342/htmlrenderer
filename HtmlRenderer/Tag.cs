@@ -10,6 +10,7 @@ namespace HtmlRenderer
         protected readonly List<ITag> Children;
         private readonly string name;
         protected IHtmlBuilder HtmlBuilder;
+        protected bool IsSelfClosing = true;
 
         public Tag(string name, IHtmlBuilder htmlBuilder)
             : this(name)
@@ -29,9 +30,8 @@ namespace HtmlRenderer
         public void RenderOn(XmlElement parent, XmlDocument xmlDocument)
         {
             var tag = xmlDocument.CreateElement(name);
-
+            tag.IsEmpty = IsSelfClosing;
             Attributes.ToList().ForEach(attribute => tag.SetAttribute(attribute.Key, attribute.Value));
-
             Children.ForEach(child => child.RenderOn(tag, xmlDocument));
             parent.AppendChild(tag);
         }

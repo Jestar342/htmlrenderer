@@ -7,5 +7,6 @@
         IRadioButtonTag RadioButton(string name);
         IFieldsetTag Fieldset { get; }
         IHtmlFormBuilder Label(string @for, string text);
+        ITextAreaTag TextArea(string textareaName);
     }
 }

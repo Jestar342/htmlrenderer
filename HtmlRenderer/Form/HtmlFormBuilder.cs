@@ -27,6 +27,13 @@ namespace HtmlRenderer.Form
             return this;
         }
 
+        public ITextAreaTag TextArea(string textareaName)
+        {
+            ITextAreaTag textAreaTag = new TextAreaTag(this, textareaName);
+            Tags.Add(textAreaTag);
+            return textAreaTag;
+        }
+
         public IBuildableTag SubmitButton(string buttonText)
         {
             var submitButton = CreateChildTag("input");

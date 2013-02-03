@@ -1,7 +1,6 @@
 using System;
-using HtmlRenderer.Form;
 
-namespace HtmlRenderer
+namespace HtmlRenderer.Form
 {
     public class FormBuilderTag : Tag
     {

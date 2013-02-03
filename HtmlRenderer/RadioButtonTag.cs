@@ -12,5 +12,11 @@ namespace HtmlRenderer
             Attributes["checked"] = "checked";
             return this;
         }
+
+        public IRadioButtonTag Value(string value)
+        {
+            Attributes["value"] = value;
+            return this;
+        }
     }
 }

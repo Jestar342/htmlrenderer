@@ -11,9 +11,4 @@ namespace HtmlRenderer
         IFormTag Form(string formAction);
         IBuildableTag Heading(int headingLevel);
     }
-
-    public interface IRadioButtonTag : IBuildableTag
-    {
-        IRadioButtonTag Checked();
-    }
 }

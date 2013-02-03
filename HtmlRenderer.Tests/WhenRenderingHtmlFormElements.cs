@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Xml;
 using HtmlRenderer.Form;
 using NUnit.Framework;
 
@@ -11,49 +11,55 @@ namespace HtmlRenderer.Tests
         [Test]
         public void ShouldAddFieldsetTagWithLegend()
         {
-            Assert.That(output, Is.StringMatching(@"<fieldset>(?=.*<legend>fieldset legend</legend>).*</fieldset>"));
+            formBuilder.Fieldset.Legend("fieldset legend");
+            Assert.That(GetOutput(), Is.EqualTo(@"<fieldset><legend>fieldset legend</legend></fieldset>"));
         }
 
         [Test]
         public void ShouldAddTextbox()
         {
-            Assert.That(output, Is.StringMatching(@"<input(?=.*type=""text"")(?=.*value=""textbox value"").*/>"));
+            formBuilder.Textbox("textbox-name").Value("textbox value");
+            Assert.That(GetOutput(), Is.EqualTo(@"<input type=""text"" name=""textbox-name"" value=""textbox value"" />"));
         }
 
         [Test]
         public void ShouldAddSubmitButton()
         {
-            Assert.That(output, Is.StringMatching(@"<input(?=.*type=""submit"")(?=.*value=""submit button value"").*/>"));
+            formBuilder.SubmitButton("submit button value");
+            Assert.That(GetOutput(), Is.EqualTo(@"<input type=""submit"" value=""submit button value"" />"));
         }
 
-        [TestFixtureSetUp]
-        public void InstantiateRendererAndBuildForm()
+        [Test]
+        public void ShouldRenderTextarea()
         {
-            var stringWriter = new StringWriter();
-            var renderer = new HtmlRenderer(stringWriter);
-            renderer.Body.With(builder => builder.Form("/form/action")
-                                                 .With(BuildForm));
-            renderer.Render();
-            output = stringWriter.ToString();
-            Console.Out.WriteLine(output);
+            formBuilder.TextArea("textarea-name").Columns(20).Rows(10);
+            Assert.That(GetOutput(), Is.EqualTo(@"<textarea name=""textarea-name"" cols=""20"" rows=""10""></textarea>"));
         }
 
-        private static void BuildForm(IHtmlFormBuilder formBuilder)
+        [Test]
+        public void ShouldRenderRadiobutton()
         {
-            formBuilder
-                .Fieldset
-                .Legend("fieldset legend")
-                .With(htmlBuilder =>
-                    {
-                        htmlBuilder
-                            .Label("textbox-id", "Label text")
-                            .Textbox("textbox-name")
-                            .Value("textbox value")
-                            .Id("textbox-id");
-                        htmlBuilder.SubmitButton("submit button value");
-                    });
+            formBuilder.RadioButton("radio1").Value("radio-value");
+            Assert.That(GetOutput(), Is.EqualTo(@"<radio name=""radio1"" value=""radio-value"" />"));
         }
 
-        private string output;
+        [SetUp]
+        public void SetUpFormBuilder()
+        {
+            tags = new List<ITag>();
+            formBuilder = new HtmlFormBuilder(tags);
+        }
+
+        private string GetOutput()
+        {
+            var xmlDocument = new XmlDocument();
+            var xmlElement = xmlDocument.CreateElement("root");
+            xmlDocument.AppendChild(xmlElement);
+            tags.ForEach(tag => tag.RenderOn(xmlElement, xmlDocument));
+            return xmlElement.InnerXml;
+        }
+
+        private HtmlFormBuilder formBuilder;
+        private List<ITag> tags;
     }
 }

@@ -1,7 +1,4 @@
-using System;
-using HtmlRenderer.Form;
-
-namespace HtmlRenderer
+namespace HtmlRenderer.Form
 {
     public class FormTag : FormBuilderTag, IFormTag
     {
@@ -9,6 +6,7 @@ namespace HtmlRenderer
         {
             Action(formAction);
             Method(method);
+            IsSelfClosing = false;
         }
 
         public IFormTag Action(string formAction)
