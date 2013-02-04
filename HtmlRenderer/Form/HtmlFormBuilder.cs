@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
 
 namespace HtmlRenderer.Form
 {
@@ -19,12 +20,11 @@ namespace HtmlRenderer.Form
             }
         }
 
-        public IHtmlFormBuilder Label(string @for, string text)
+        public IBuildableTag Label(string @for)
         {
             var labelTag = CreateChildTag("label");
             labelTag.Attributes["for"] = @for;
-            labelTag.With(builder => builder.Text(text));
-            return this;
+            return labelTag;
         }
 
         public ITextAreaTag TextArea(string textareaName)
@@ -36,9 +36,9 @@ namespace HtmlRenderer.Form
 
         public IBuildableTag SubmitButton(string buttonText)
         {
-            var submitButton = CreateChildTag("input");
+            var submitButton = CreateChildTag("button");
             submitButton.Attributes["type"] = "submit";
-            submitButton.Attributes["value"] = buttonText;
+            submitButton.With(builder => builder.Text(buttonText));
             return submitButton;
         }
 
@@ -54,6 +54,36 @@ namespace HtmlRenderer.Form
             var radioTag = new RadioButtonTag(name, this);
             Tags.Add(radioTag);
             return radioTag;
+        }
+
+        public IInputTag PasswordTextBox(string passwordName)
+        {
+            var passwordTag = new InputTag("password", passwordName);
+            Tags.Add(passwordTag);
+            return passwordTag;
+        }
+
+        public IBuildableTag ResetButton(string buttonText)
+        {
+            var tag = CreateChildTag("button");
+            tag.Attributes["type"] = "reset";
+            tag.With(builder => builder.Text(buttonText));
+            return tag;
+        }
+    }
+
+    public class RawMarkup : ITag
+    {
+        private readonly string rawMarkup;
+
+        public RawMarkup(string rawMarkup)
+        {
+            this.rawMarkup = rawMarkup;
+        }
+
+        public void RenderOn(XmlElement parent, XmlDocument xmlDocument)
+        {
+            parent.InnerXml += rawMarkup;
         }
     }
 }

@@ -6,7 +6,9 @@
         IInputTag Textbox(string textBoxName);
         IRadioButtonTag RadioButton(string name);
         IFieldsetTag Fieldset { get; }
-        IHtmlFormBuilder Label(string @for, string text);
+        IBuildableTag Label(string @for);
         ITextAreaTag TextArea(string textareaName);
+        IInputTag PasswordTextBox(string passwordName);
+        IBuildableTag ResetButton(string buttonText);
     }
 }

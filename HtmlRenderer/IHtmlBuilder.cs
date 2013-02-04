@@ -10,5 +10,6 @@ namespace HtmlRenderer
         IImageTag Image(string src);
         IFormTag Form(string formAction);
         IBuildableTag Heading(int headingLevel);
+        IHtmlBuilder RawMarkup(string rawMarkup);
     }
 }

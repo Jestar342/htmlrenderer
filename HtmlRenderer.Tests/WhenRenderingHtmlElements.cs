@@ -8,24 +8,24 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlElements
     {
         [Test]
-        public void ShouldRenderSpan()
+        public void ShouldEscapeText()
         {
-            htmlBuilder.Span.Class("span-class").With(builder => builder.Text("foo"));
-            Assert.That(GetOutput(), Is.EqualTo(@"<span class=""span-class"">foo</span>"));
+            htmlBuilder.Text(@"<a href=""naughty href"">don't click this</a>");
+            Assert.That(GetOutput(), Is.EqualTo(@"&lt;a href=""naughty href""&gt;don't click this&lt;/a&gt;"));
         }
 
         [Test]
-        public void ShouldRenderParagraph()
+        public void ShouldNotEscapeRaw()
         {
-            htmlBuilder.Paragraph.With(builder => builder.Text("lolol"));
-            Assert.That(GetOutput(), Is.EqualTo(@"<p>lolol</p>"));
+            htmlBuilder.RawMarkup(@"<a href=""link"">click</a>");
+            Assert.That(GetOutput(), Is.EqualTo(@"<a href=""link"">click</a>"));
         }
 
         [Test]
-        public void ShouldRenderImage()
+        public void ShouldRenderAnchor()
         {
-            htmlBuilder.Image("/src/image.jpg").AlternativeText("alt text");
-            Assert.That(GetOutput(), Is.EqualTo(@"<img src=""/src/image.jpg"" alt=""alt text"" />"));
+            htmlBuilder.Anchor("/some/link").With(builder => builder.Text("linky text"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<a href=""/some/link"">linky text</a>"));
         }
 
         [Test]
@@ -43,17 +43,31 @@ namespace HtmlRenderer.Tests
         }
 
         [Test]
-        public void ShouldRenderAnchor()
-        {
-            htmlBuilder.Anchor("/some/link").With(builder => builder.Text("linky text"));
-            Assert.That(GetOutput(), Is.StringMatching(@"<a href=""/some/link"">linky text</a>"));
-        }
-
-        [Test]
         public void ShouldRenderHeader()
         {
             htmlBuilder.Heading(1).With(builder => builder.Text("Heading"));
-            Assert.That(GetOutput(), Is.StringContaining(@"<h1>Heading</h1>"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<h1>Heading</h1>"));
+        }
+
+        [Test]
+        public void ShouldRenderImage()
+        {
+            htmlBuilder.Image("/src/image.jpg").AlternativeText("alt text");
+            Assert.That(GetOutput(), Is.EqualTo(@"<img src=""/src/image.jpg"" alt=""alt text"" />"));
+        }
+
+        [Test]
+        public void ShouldRenderParagraph()
+        {
+            htmlBuilder.Paragraph.With(builder => builder.Text("lolol"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<p>lolol</p>"));
+        }
+
+        [Test]
+        public void ShouldRenderSpan()
+        {
+            htmlBuilder.Span.Class("span-class").With(builder => builder.Text("foo"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<span class=""span-class"">foo</span>"));
         }
 
         [SetUp]

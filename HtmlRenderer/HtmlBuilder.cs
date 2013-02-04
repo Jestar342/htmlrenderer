@@ -65,5 +65,12 @@ namespace HtmlRenderer
             Tags.Add(tag);
             return tag;
         }
+
+        public IHtmlBuilder RawMarkup(string rawMarkup)
+        {
+            ITag tag = new RawMarkup(rawMarkup);
+            Tags.Add(tag);
+            return this;
+        }
     }
 }

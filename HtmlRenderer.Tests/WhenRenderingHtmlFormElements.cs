@@ -9,6 +9,13 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlFormElements
     {
         [Test]
+        public void ShouldRenderLabel()
+        {
+            formBuilder.Label("some-id").With(builder => builder.Text("label text"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<label for=""some-id"">label text</label>"));
+        }
+
+        [Test]
         public void ShouldAddFieldsetTagWithLegend()
         {
             formBuilder.Fieldset.Legend("fieldset legend");
@@ -26,7 +33,7 @@ namespace HtmlRenderer.Tests
         public void ShouldAddSubmitButton()
         {
             formBuilder.SubmitButton("submit button value");
-            Assert.That(GetOutput(), Is.EqualTo(@"<input type=""submit"" value=""submit button value"" />"));
+            Assert.That(GetOutput(), Is.EqualTo(@"<button type=""submit"">submit button value</button>"));
         }
 
         [Test]
@@ -41,6 +48,20 @@ namespace HtmlRenderer.Tests
         {
             formBuilder.RadioButton("radio1").Value("radio-value");
             Assert.That(GetOutput(), Is.EqualTo(@"<radio name=""radio1"" value=""radio-value"" />"));
+        }
+
+        [Test]
+        public void ShouldRenderPassword()
+        {
+            formBuilder.PasswordTextBox("password-name").Value("password");
+            Assert.That(GetOutput(), Is.EqualTo(@"<input type=""password"" name=""password-name"" value=""password"" />"));
+        }
+
+        [Test]
+        public void ShouldRenderResetButton()
+        {
+            formBuilder.ResetButton("Click to reset");
+            Assert.That(GetOutput(), Is.EqualTo(@"<button type=""reset"">Click to reset</button>"));
         }
 
         [SetUp]
@@ -59,7 +80,7 @@ namespace HtmlRenderer.Tests
             return xmlElement.InnerXml;
         }
 
-        private HtmlFormBuilder formBuilder;
+        private IHtmlFormBuilder formBuilder;
         private List<ITag> tags;
     }
 }
