@@ -9,6 +9,12 @@ namespace HtmlRenderer.Tests
     public class WhenRenderingHtmlFormElements
     {
         [Test]
+        public void ShouldRenderFileUpload()
+        {
+            formBuilder.File("file1").FileTypesAccepted("application/foo");
+            Assert.That(GetOutput(), Is.EqualTo(@"<input type=""file"" name=""file1"" accept=""application/foo"" />"));
+        }
+        [Test]
         public void ShouldRenderLabel()
         {
             formBuilder.Label("some-id").With(builder => builder.Text("label text"));

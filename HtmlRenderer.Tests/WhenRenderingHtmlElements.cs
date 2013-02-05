@@ -70,6 +70,25 @@ namespace HtmlRenderer.Tests
             Assert.That(GetOutput(), Is.EqualTo(@"<span class=""span-class"">foo</span>"));
         }
 
+        [Test]
+        public void ShouldRenderUnorderedList()
+        {
+            htmlBuilder.UnorderedList.With(builder =>
+                {
+                    builder.ListItem.With(builder1 => builder1.Text("first"));
+                    builder.ListItem.With(builder1 => builder1.Text("second"));
+                });
+   
+            Assert.That(GetOutput(), Is.EqualTo(@"<ul><li>first</li><li>second</li></ul>"));
+        }
+
+        [Test]
+        public void ShouldRenderOrderedList()
+        {
+            htmlBuilder.OrderedList.With(builder => builder.ListItem.With(builder1 => builder1.Text("foo")));
+            Assert.That(GetOutput(), Is.EqualTo("<ol><li>foo</li></ol>"));
+        }
+
         [SetUp]
         public void SetUpBuilder()
         {
@@ -77,7 +96,7 @@ namespace HtmlRenderer.Tests
             htmlBuilder = new HtmlBuilder(tags);
         }
 
-        private HtmlBuilder htmlBuilder;
+        private IHtmlBuilder htmlBuilder;
         private List<ITag> tags;
 
         private string GetOutput()

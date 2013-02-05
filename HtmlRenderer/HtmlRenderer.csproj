@@ -39,15 +39,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyTag.cs" />
+    <Compile Include="Form\FileTag.cs" />
     <Compile Include="Form\FormBuilderTag.cs" />
     <Compile Include="Form\FormChildTag.cs" />
     <Compile Include="Form\FormTag.cs" />
     <Compile Include="Form\HtmlFormBuilder.cs" />
     <Compile Include="Form\IFieldsetTag.cs" />
+    <Compile Include="Form\IFileTag.cs" />
     <Compile Include="Form\IHtmlFormBuilder.cs" />
     <Compile Include="Form\IInputTag.cs" />
     <Compile Include="Form\InputTag.cs" />
     <Compile Include="Form\ITextAreaTag.cs" />
+    <Compile Include="Form\RawMarkup.cs" />
     <Compile Include="Form\TextAreaTag.cs" />
     <Compile Include="HeadTag.cs" />
     <Compile Include="HtmlBuilder.cs" />

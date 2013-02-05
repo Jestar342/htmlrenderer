@@ -27,6 +27,21 @@ namespace HtmlRenderer
             get { return CreateChildTag("p"); }
         }
 
+        public IBuildableTag UnorderedList
+        {
+            get { return CreateChildTag("ul"); }
+        }
+
+        public IBuildableTag ListItem
+        {
+            get { return CreateChildTag("li"); }
+        }
+
+        public IBuildableTag OrderedList
+        {
+            get { return CreateChildTag("ol"); }
+        }
+
         public IHtmlBuilder Text(string text)
         {
             Tags.Add(new TextTag(text));
@@ -59,18 +74,18 @@ namespace HtmlRenderer
             return CreateChildTag(string.Format("h{0}", headingLevel));
         }
 
-        public IBuildableTag CreateChildTag(string name)
-        {
-            var tag = new Tag(name, this);
-            Tags.Add(tag);
-            return tag;
-        }
-
         public IHtmlBuilder RawMarkup(string rawMarkup)
         {
             ITag tag = new RawMarkup(rawMarkup);
             Tags.Add(tag);
             return this;
+        }
+
+        public IBuildableTag CreateChildTag(string name)
+        {
+            var tag = new Tag(name, this);
+            Tags.Add(tag);
+            return tag;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Xml;
 
 namespace HtmlRenderer.Form
 {
@@ -70,20 +69,12 @@ namespace HtmlRenderer.Form
             tag.With(builder => builder.Text(buttonText));
             return tag;
         }
-    }
 
-    public class RawMarkup : ITag
-    {
-        private readonly string rawMarkup;
-
-        public RawMarkup(string rawMarkup)
+        public IFileTag File(string name)
         {
-            this.rawMarkup = rawMarkup;
-        }
-
-        public void RenderOn(XmlElement parent, XmlDocument xmlDocument)
-        {
-            parent.InnerXml += rawMarkup;
+            var fileTag = new FileTag(name);
+            Tags.Add(fileTag);
+            return fileTag;
         }
     }
 }

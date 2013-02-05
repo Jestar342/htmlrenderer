@@ -10,5 +10,6 @@
         ITextAreaTag TextArea(string textareaName);
         IInputTag PasswordTextBox(string passwordName);
         IBuildableTag ResetButton(string buttonText);
+        IFileTag File(string name);
     }
 }
