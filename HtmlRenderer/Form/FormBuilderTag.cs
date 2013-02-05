@@ -2,7 +2,7 @@ using System;
 
 namespace HtmlRenderer.Form
 {
-    public class FormBuilderTag : Tag
+    public class FormBuilderTag : GenericTag
     {
         public FormBuilderTag(string name, IHtmlBuilder htmlBuilder) : base(name, htmlBuilder)
         {

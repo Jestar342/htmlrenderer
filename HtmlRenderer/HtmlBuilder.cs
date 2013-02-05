@@ -83,7 +83,7 @@ namespace HtmlRenderer
 
         public IBuildableTag CreateChildTag(string name)
         {
-            var tag = new Tag(name, this);
+            var tag = new GenericTag(name, this);
             Tags.Add(tag);
             return tag;
         }

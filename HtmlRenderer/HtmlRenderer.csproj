@@ -39,9 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyTag.cs" />
+    <Compile Include="Form\FieldsetTag.cs" />
     <Compile Include="Form\FileTag.cs" />
     <Compile Include="Form\FormBuilderTag.cs" />
-    <Compile Include="Form\FormChildTag.cs" />
     <Compile Include="Form\FormTag.cs" />
     <Compile Include="Form\HtmlFormBuilder.cs" />
     <Compile Include="Form\IFieldsetTag.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="LinkTag.cs" />
     <Compile Include="RadioButtonTag.cs" />
     <Compile Include="ScriptTag.cs" />
-    <Compile Include="Tag.cs" />
+    <Compile Include="GenericTag.cs" />
     <Compile Include="TextTag.cs" />
   </ItemGroup>
   <ItemGroup>

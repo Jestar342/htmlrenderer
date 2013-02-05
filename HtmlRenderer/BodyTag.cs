@@ -1,6 +1,6 @@
 namespace HtmlRenderer
 {
-    public class BodyTag : Tag, IBodyTag
+    public class BodyTag : GenericTag, IBodyTag
     {
         public BodyTag() : base("body")
         {

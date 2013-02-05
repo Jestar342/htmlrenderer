@@ -33,9 +33,9 @@ namespace HtmlRenderer
             return this;
         }
 
-        private Tag CreateChildTag(string title)
+        private GenericTag CreateChildTag(string title)
         {
-            var tag = new Tag(title, null);
+            var tag = new GenericTag(title, null);
             children.Add(tag);
             return tag;
         }

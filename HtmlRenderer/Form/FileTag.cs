@@ -1,6 +1,6 @@
 ﻿namespace HtmlRenderer.Form
 {
-    public class FileTag : FormChildTag, IFileTag
+    public class FileTag : FormBuilderTag, IFileTag
     {
         public FileTag(string name) : base("input", null)
         {

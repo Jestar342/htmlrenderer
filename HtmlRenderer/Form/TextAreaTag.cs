@@ -2,7 +2,7 @@
 
 namespace HtmlRenderer.Form
 {
-    public class TextAreaTag : FormChildTag, ITextAreaTag
+    public class TextAreaTag : FormBuilderTag, ITextAreaTag
     {
         public TextAreaTag(IHtmlFormBuilder htmlFormBuilder, string name) : base("textarea", htmlFormBuilder)
         {

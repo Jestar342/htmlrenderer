@@ -1,6 +1,6 @@
 namespace HtmlRenderer
 {
-    public class ImageTag : Tag, IImageTag
+    public class ImageTag : GenericTag, IImageTag
     {
         public string Src { get; private set; }
 

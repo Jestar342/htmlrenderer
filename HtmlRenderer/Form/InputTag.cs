@@ -1,6 +1,6 @@
 ﻿namespace HtmlRenderer.Form
 {
-    public class InputTag : Tag, IInputTag
+    public class InputTag : GenericTag, IInputTag
     {
         public InputTag(string type, string name) 
             : base("input")
