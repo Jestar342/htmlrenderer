@@ -7,8 +7,8 @@ namespace HtmlRenderer
 {
     public class GenericTag : IBuildableTag
     {
-        protected readonly List<ITag> Children;
         private readonly string name;
+        protected readonly List<ITag> Children;
         protected IHtmlBuilder HtmlBuilder;
         protected bool IsSelfClosing = true;
 
