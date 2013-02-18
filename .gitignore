@@ -1,6 +1,4 @@
 bin/
 obj/
-packages/*
 *.suo
-!packages/repositories.config
 _ReSharper*
