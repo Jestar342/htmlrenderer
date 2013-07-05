@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using HtmlRenderer.Form;
+using HtmlRenderer.Form.Tags;
+using HtmlRenderer.Tags;
 
 namespace HtmlRenderer
 {

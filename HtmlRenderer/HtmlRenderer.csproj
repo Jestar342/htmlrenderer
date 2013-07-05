@@ -38,25 +38,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BodyTag.cs" />
-    <Compile Include="Form\FieldsetTag.cs" />
-    <Compile Include="Form\FileTag.cs" />
-    <Compile Include="Form\FormBuilderTag.cs" />
-    <Compile Include="Form\FormTag.cs" />
     <Compile Include="Form\HtmlFormBuilder.cs" />
     <Compile Include="Form\IFieldsetTag.cs" />
     <Compile Include="Form\IFileTag.cs" />
     <Compile Include="Form\IHtmlFormBuilder.cs" />
     <Compile Include="Form\IInputTag.cs" />
-    <Compile Include="Form\InputTag.cs" />
     <Compile Include="Form\ITextAreaTag.cs" />
-    <Compile Include="Form\RawMarkup.cs" />
-    <Compile Include="Form\TextAreaTag.cs" />
-    <Compile Include="HeadTag.cs" />
+    <Compile Include="Form\Tags\FieldsetTag.cs" />
+    <Compile Include="Form\Tags\FileTag.cs" />
+    <Compile Include="Form\Tags\FormBuilderTag.cs" />
+    <Compile Include="Form\Tags\FormTag.cs" />
+    <Compile Include="Form\Tags\InputTag.cs" />
+    <Compile Include="Form\Tags\TextAreaTag.cs" />
     <Compile Include="HtmlBuilder.cs" />
     <Compile Include="HtmlHeadBuilder.cs" />
     <Compile Include="HtmlRenderer.cs" />
-    <Compile Include="HtmlTag.cs" />
     <Compile Include="IBodyTag.cs" />
     <Compile Include="IBuildableTag.cs" />
     <Compile Include="IFormBuilderTag.cs" />
@@ -67,15 +63,19 @@
     <Compile Include="IHtmlTag.cs" />
     <Compile Include="IImageTag.cs" />
     <Compile Include="ILinkTag.cs" />
-    <Compile Include="ImageTag.cs" />
     <Compile Include="IRadioButtonTag.cs" />
     <Compile Include="IScriptTag.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="LinkTag.cs" />
-    <Compile Include="RadioButtonTag.cs" />
-    <Compile Include="ScriptTag.cs" />
-    <Compile Include="GenericTag.cs" />
-    <Compile Include="TextTag.cs" />
+    <Compile Include="RawMarkup.cs" />
+    <Compile Include="Tags\BodyTag.cs" />
+    <Compile Include="Tags\GenericTag.cs" />
+    <Compile Include="Tags\HeadTag.cs" />
+    <Compile Include="Tags\HtmlTag.cs" />
+    <Compile Include="Tags\ImageTag.cs" />
+    <Compile Include="Tags\LinkTag.cs" />
+    <Compile Include="Tags\RadioButtonTag.cs" />
+    <Compile Include="Tags\ScriptTag.cs" />
+    <Compile Include="Tags\TextTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Xml" />

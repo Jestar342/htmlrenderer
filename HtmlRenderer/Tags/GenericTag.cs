@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
-namespace HtmlRenderer
+namespace HtmlRenderer.Tags
 {
     public class GenericTag : IBuildableTag
     {

@@ -1,4 +1,6 @@
-namespace HtmlRenderer.Form
+using HtmlRenderer.Tags;
+
+namespace HtmlRenderer.Form.Tags
 {
     public class FieldsetTag : FormBuilderTag, IFieldsetTag
     {

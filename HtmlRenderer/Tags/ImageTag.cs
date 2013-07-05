@@ -1,4 +1,4 @@
-namespace HtmlRenderer
+namespace HtmlRenderer.Tags
 {
     public class ImageTag : GenericTag, IImageTag
     {

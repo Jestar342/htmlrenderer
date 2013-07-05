@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace HtmlRenderer
+namespace HtmlRenderer.Tags
 {
     public class TextTag : ITag
     {
